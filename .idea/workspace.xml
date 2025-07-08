@@ -5,36 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b07a96c-bc00-425f-8389-31d4abe7fb19" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.dockerignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/SmartHomeScout.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smarthousescout/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smarthousescout/asgi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smarthousescout/settings.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smarthousescout/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/smarthousescout/wsgi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SmartHomeScout.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apartments/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apartments/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apartments/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apartments/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apartments/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apartments/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apartments/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apartments/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/smarthousescout/private_settings.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/_base.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthousescout/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/smarthousescout/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthousescout/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/smarthousescout/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2zH6afDvla3hxoQyQyjyi9idxKr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -46,9 +54,12 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.models.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "apartments",
     "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/python/projects/django",
     "settings.editor.selected.configurable": "configurable.group.editor"
   }
 }]]></component>
@@ -73,6 +84,37 @@
   <component name="UnknownFeatures">
     <option featureType="com.intellij.fileTypeFactory" implementationName="Dockerfile" />
     <option featureType="com.intellij.fileTypeFactory" implementationName="docker-compose.yml" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="master" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />

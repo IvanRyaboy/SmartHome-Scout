@@ -13,6 +13,9 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
+      - POSTGRES_DB=smarthousescoutdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1234
       - "POSTGRES_HOST_AUTH_METHOD=trust"
 
 volumes:
