@@ -8,8 +8,8 @@ class Region(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Области'
-        verbose_name_plural = 'Область'
+        verbose_name = 'Область'
+        verbose_name_plural = 'Области'
 
 
 class Town(models.Model):

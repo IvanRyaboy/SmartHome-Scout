@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django_extensions',
     # local
     'apartments.apps.ApartmentsConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 MIDDLEWARE = [
@@ -137,4 +138,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# from private_settings import *
+# user settings
+AUTH_USER_MODEL = "accounts.CustomUser"
