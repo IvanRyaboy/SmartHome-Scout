@@ -19,7 +19,13 @@ from django.urls import path, include
 from smarthousescout import settings
 
 urlpatterns = [
+    # Django admin
     path('admin/', admin.site.urls),
-    path("apartments/", include("apartments.urls", namespace='apartments'))
+    # User management
+    path("accounts/", include("django.contrib.auth.urls")),
+    # Local apps
+    path("", include("mainpage.urls")),
+    path("apartments/", include("apartments.urls", namespace='apartments')),
+    path("accounts/", include("accounts.urls")),
 ]
 

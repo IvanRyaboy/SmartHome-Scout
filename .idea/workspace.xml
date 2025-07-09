@@ -5,11 +5,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b07a96c-bc00-425f-8389-31d4abe7fb19" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/templates/apartments/apartments_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainpage/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainpage/admin.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainpage/apps.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainpage/migrations/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainpage/models.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainpage/tests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainpage/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mainpage/views.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/registration/signup.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apartments/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/apartments/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apartments/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apartments/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/apartments/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apartments/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthousescout/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/smarthousescout/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/smarthousescout/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/smarthousescout/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +39,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/templates/home.html" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -38,18 +53,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.models.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "apartments",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/python/projects/django",
-    "settings.editor.selected.configurable": "configurable.group.editor"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.models.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;accounts&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/python/projects/django&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

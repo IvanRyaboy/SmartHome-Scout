@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     # extensions
     'django_extensions',
     # local
+    'mainpage.apps.MainpageConfig',
     'apartments.apps.ApartmentsConfig',
     'accounts.apps.AccountsConfig',
 ]
@@ -140,3 +141,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # user settings
 AUTH_USER_MODEL = "accounts.CustomUser"
+LOGIN_REDIRECT_URL = "home"
+LOGOUT_REDIRECT_URL = "home"
