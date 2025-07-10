@@ -5,22 +5,64 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4b07a96c-bc00-425f-8389-31d4abe7fb19" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/accounts/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainpage/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainpage/admin.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainpage/apps.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainpage/migrations/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainpage/models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainpage/tests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainpage/urls.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mainpage/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/login.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/registration/signup.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/about.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/call-to-action.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/carousel-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/carousel-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/header.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-apartment.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-building.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-condominium.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-deal.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-house.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-housing.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-luxury.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-neighborhood.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/icon-villa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/property-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/property-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/property-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/property-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/property-5.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/property-6.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/team-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/team-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/team-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/team-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/testimonial-1.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/testimonial-2.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/testimonial-3.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/testimonial-4.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/animate/animate.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/animate/animate.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/easing/easing.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/easing/easing.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/LICENSE" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/ajax-loader.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.carousel.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.carousel.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.theme.default.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.theme.default.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.theme.green.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.theme.green.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/assets/owl.video.play.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/owl.carousel.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/owlcarousel/owl.carousel.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/waypoints/links.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/waypoints/waypoints.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/wow/wow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/lib/wow/wow.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/about.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/tests.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/accounts/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/accounts/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainpage/tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainpage/tests.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainpage/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainpage/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainpage/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainpage/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/smarthousescout/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/smarthousescout/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/smarthousescout/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/smarthousescout/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/_base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/_base.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/home.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,12 +101,26 @@
     &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
     &quot;Python.models.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;accounts&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;apartments&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/python/projects/django&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/python/SmartHomeScout/SmartHomeScout/static/lib/wow&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\python\SmartHomeScout\SmartHomeScout\static\lib\wow" />
+      <recent name="D:\python\SmartHomeScout\SmartHomeScout\static\lib\waypoints" />
+      <recent name="D:\python\SmartHomeScout\SmartHomeScout\static\lib\owlcarousel" />
+      <recent name="D:\python\SmartHomeScout\SmartHomeScout\static\lib\easing" />
+      <recent name="D:\python\SmartHomeScout\SmartHomeScout\static\lib\animate" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\python\SmartHomeScout\SmartHomeScout\static\js" />
+      <recent name="D:\python\SmartHomeScout\SmartHomeScout\static\images" />
+      <recent name="D:\python\SmartHomeScout\SmartHomeScout\static\css" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
