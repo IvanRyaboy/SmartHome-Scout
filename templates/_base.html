@@ -59,23 +59,18 @@
                         <a href="{% url 'home' %}" class="nav-item nav-link {% block nav_home_active %}{% endblock %}">Home</a>
                         <a href="{% url 'about' %}" class="nav-item nav-link {% block nav_about_active %}{% endblock %}">About</a>
                         <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
+                            <a href="{% url 'property' %}" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Property</a>
                             <div class="dropdown-menu rounded-0 m-0">
-                                <a href="#" class="dropdown-item">Property List</a>
-                                <a href="#" class="dropdown-item">Property Type</a>
-                                <a href="#" class="dropdown-item">Property Agent</a>
+                                <a href="{% url 'apartments:home' %}" class="dropdown-item">Flats</a>
                             </div>
                         </div>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="#" class="dropdown-item">Testimonial</a>
-                                <a href="#" class="dropdown-item">404 Error</a>
-                            </div>
-                        </div>
-                        <a href="#" class="nav-item nav-link">Contact</a>
                     </div>
-                    <a href="#" class="btn btn-primary px-3 d-none d-lg-flex">Add Property</a>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'account_logout' %}" class="btn btn-primary px-3 d-none d-lg-flex">Log Out</a>
+                    {% else %}
+                        <a href="{% url 'account_login' %}" class="btn btn-primary px-3 d-none d-lg-flex">Log In</a>
+                        <a href="{% url 'account_signup' %}" class="nav-item nav-link">Sign Up</a>
+                    {% endif %}
                 </div>
             </nav>
         </div>
