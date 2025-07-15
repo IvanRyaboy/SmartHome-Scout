@@ -8,6 +8,7 @@
 {% block content %}
 <div class="container py-5">
     <h1 class="mb-4">Список квартир</h1>
+    <h5><a href="{% url 'apartments:add_apartment' %}">Добавить квартиру</a></h5>
     <div class="row g-4">
         {% if apartments_list %}
             {% for apartment in apartments_list %}

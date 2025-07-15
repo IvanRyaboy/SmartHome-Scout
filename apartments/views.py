@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from .utils import OwnerRequiredMixin
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Apartment
 from .forms import *
 
@@ -24,5 +25,26 @@ class AddApartmentView(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         f = form.save(commit=False)
-        f.author = self.request.user
+        f.owner = self.request.user
         return super().form_valid(form)
+
+
+class UpdateApartmentView(LoginRequiredMixin, OwnerRequiredMixin, UpdateView):
+    model = Apartment
+    form_class = AddApartmentForm
+    template_name = 'apartments/add_apartment.html'
+
+    def get_success_url(self):
+        return self.object.get_absolute_url()
+
+    def get_context_data(self, request, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user'] = request.user
+        return context
+
+
+class DeleteApartmentView(LoginRequiredMixin, OwnerRequiredMixin, DeleteView):
+    model = Apartment
+
+    def get_success_url(self):
+        return reverse('apartments:home')

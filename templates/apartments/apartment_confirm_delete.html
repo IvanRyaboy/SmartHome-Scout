@@ -1,0 +1,12 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}Удаление квартиры{% endblock title %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+    <p>Вы уверены, что хотите удалить "{{ object }}"?</p>
+    {{ form }}
+    <input type="submit" value="Удалить">
+</form>
+{% endblock content %}

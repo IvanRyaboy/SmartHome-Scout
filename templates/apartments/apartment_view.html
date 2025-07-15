@@ -46,6 +46,10 @@
                     <li class="list-group-item"><strong>Дата договора:</strong> {{ apartment.contract_date|date:"d.m.Y H:i" }}</li>
                     {% endif %}
                 </ul>
+                {% if apartment.owner == user %}
+                    <h3><a href="{% url 'apartments:update_apartment' pk=apartment.pk %}">Изменить квартиру</a></h3>
+                    <h3><a href="{% url 'apartments:delete_apartment' pk=apartment.pk %}">Удалить квартиру</a></h3>
+                {% endif %}
                 <a href="{% url 'apartments:home' %}" class="btn btn-secondary">← К списку квартир</a>
             </div>
         </div>
