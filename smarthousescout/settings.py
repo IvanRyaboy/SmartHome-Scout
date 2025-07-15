@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from environs import Env
+
+
+env = Env()
+env.read_env()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-6c%^((bmv7te8yhrh=om40!j4*ogj04!yz*q93way0kc7w$(mj'
+SECRET_KEY = env("DJANGO_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env.bool("DJANGO_DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -84,14 +90,8 @@ WSGI_APPLICATION = 'smarthousescout.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'smarthousescoutdb',
-        'USER': 'postgres',
-        'PASSWORD': '1234',
-        'HOST': 'db',
-        'PORT': '5432',
-    }
+    'default': env.dj_db_url("DATABASE_URL",
+                             default="postgres://postgres@db/postgres")
 }
 # DATABASES = {
 #     'default': {
@@ -158,8 +158,16 @@ AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
 ]
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_FIELDS = ['username', 'email*', 'password1*', 'password2*']
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_UNIQUE_EMAIL = True
+
+
+# email settings
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587

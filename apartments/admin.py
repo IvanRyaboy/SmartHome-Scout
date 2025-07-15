@@ -25,9 +25,11 @@ class LocationAdmin(admin.ModelAdmin):
 @admin.register(Building)
 class BuildingAdmin(admin.ModelAdmin):
     list_display = ('id', 'location')
+    list_display_links = ('id', 'location')
 
 
 @admin.register(Apartment)
 class ApartmentAdmin(admin.ModelAdmin):
-    list_display = ('id', )
+    list_display = ('id', 'building')
+    list_display_links = ('id', 'building')
 

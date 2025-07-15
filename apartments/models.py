@@ -1,4 +1,8 @@
+import uuid
+
+from django.contrib.auth import get_user_model
 from django.db import models
+from django.urls import reverse
 
 
 class Region(models.Model):
@@ -91,6 +95,13 @@ class Apartment(models.Model):
         COLLECTIVE = 'Collective', 'Коллективная'
         FOREIGN = 'Foreign', 'Иностранная'
 
+    id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+
+    title = models.CharField(verbose_name='Название', default='Купить квартиру')
     price = models.FloatField(verbose_name='Цена')
     building = models.ForeignKey(Building,
                                  on_delete=models.CASCADE,
@@ -108,7 +119,10 @@ class Apartment(models.Model):
                                     default=None)
     room_count = models.IntegerField(verbose_name='Количество комнат')
     description = models.TextField(verbose_name='Описание')
-    owner = models.CharField(verbose_name='Владелец', max_length=255)
+    owner = models.ForeignKey(get_user_model(),
+                              on_delete=models.CASCADE,
+                              related_name="apartments",
+                              verbose_name='Владелец')
     floor = models.IntegerField(verbose_name='Этаж')
     sale_conditions = models.CharField(choices=Sale.choices,
                                        verbose_name='Условия продажи',
@@ -132,7 +146,10 @@ class Apartment(models.Model):
                                       max_length=20)
 
     def __str__(self):
-        return f"Apartment in {self.building} - {self.room_count} rooms, {self.total_area} m²"
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('apartments:flat_detail', args=[str(self.id)])
 
     class Meta:
         verbose_name = 'Квартира'

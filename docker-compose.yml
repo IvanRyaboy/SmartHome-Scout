@@ -8,12 +8,15 @@ services:
       - 8000:8000
     depends_on:
       - db
+    environment:
+      - "DJANGO_SECRET_KEY=django-insecure-6c%^((bmv7te8yhrh=om40!j4*ogj04!yz*q93way0kc7w$(mj"
+      - "DJANGO_DEBUG=True"
   db:
     image: postgres:16.9
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
-      - POSTGRES_DB=smarthousescoutdb
+      - POSTGRES_DB=smarthomescoutdb
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1234
       - "POSTGRES_HOST_AUTH_METHOD=trust"

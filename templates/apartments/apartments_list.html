@@ -1,9 +1,42 @@
 {% extends "_base.html" %}
+{% load static %}
 
 {% block title %}
-Home
+Квартиры
 {% endblock title %}
 
 {% block content %}
- <h1>The home page 2</h1>
+<div class="container py-5">
+    <h1 class="mb-4">Список квартир</h1>
+    <div class="row g-4">
+        {% if apartments_list %}
+            {% for apartment in apartments_list %}
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">
+                                <a href="{{ apartment.get_absolute_url }}" class="text-decoration-none text-primary">
+                                    {{ apartment.title|default:"Квартира" }}
+                                </a>
+                            </h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ apartment.price|floatformat:0 }} ₽</h6>
+                            <ul class="list-unstyled mb-3">
+                                <li><strong>Дом:</strong> {{ apartment.building }}</li>
+                                <li><strong>Этаж:</strong> {{ apartment.floor }}, <strong>Комнат:</strong> {{ apartment.room_count }}</li>
+                                <li><strong>Площадь:</strong> {{ apartment.total_area }} м²</li>
+                                <li><strong>Состояние:</strong> {{ apartment.get_condition_display }}</li>
+                                <li><strong>Тип собственности:</strong> {{ apartment.get_ownership_type_display }}</li>
+                            </ul>
+                            <a href="{{ apartment.get_absolute_url }}" class="mt-auto btn btn-outline-primary btn-sm">Подробнее</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <p class="text-center text-muted">Квартиры не найдены.</p>
+            </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock content %}

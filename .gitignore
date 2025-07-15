@@ -1,4 +1,6 @@
-.venv
-__pycache__/
-db.sqlite3
-private_settings.py
+/docker-compose-prod.yml
+/db.sqlite3
+/.venv/
+**/__pycache__/
+*.py[cod]
+/.idea/

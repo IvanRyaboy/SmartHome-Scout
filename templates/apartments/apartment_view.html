@@ -1,0 +1,55 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Apartment Detail Start -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 class="mb-4">{{ apartment.title }}</h2>
+                <h4 class="text-primary mb-3">{{ apartment.price|floatformat:0 }} ₽</h4>
+                <p><strong>Описание:</strong>{{ apartment.description }}</p>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item"><strong>Дом:</strong> {{ apartment.building }}</li>
+                    <li class="list-group-item"><strong>Этаж:</strong> {{ apartment.floor }}</li>
+                    <li class="list-group-item"><strong>Количество комнат:</strong> {{ apartment.room_count }}</li>
+                    <li class="list-group-item"><strong>Общая площадь:</strong> {{ apartment.total_area }} м²</li>
+                    <li class="list-group-item"><strong>Жилая площадь:</strong> {{ apartment.living_area }} м²</li>
+                    {% if apartment.kitchen_area %}
+                    <li class="list-group-item"><strong>Площадь кухни:</strong> {{ apartment.kitchen_area }} м²</li>
+                    {% endif %}
+                    {% if apartment.balcony %}
+                    <li class="list-group-item">
+                        <strong>Балкон:</strong> Есть
+                        {% if apartment.balcony_type %}
+                            ({{ apartment.get_balcony_type_display }})
+                        {% endif %}
+                        {% if apartment.balcony_area %}
+                            , {{ apartment.balcony_area }} м²
+                        {% endif %}
+                    </li>
+                    {% else %}
+                    <li class="list-group-item"><strong>Балкон:</strong> Нет</li>
+                    {% endif %}
+                    <li class="list-group-item"><strong>Количество санузлов:</strong> {{ apartment.bathroom_count|default:"—" }}</li>
+                    <li class="list-group-item"><strong>Высота потолков:</strong> {{ apartment.ceiling_height|default:"—" }} м</li>
+                    <li class="list-group-item"><strong>Ремонт:</strong> {{ apartment.renovation|default:"—" }}</li>
+                    <li class="list-group-item"><strong>Состояние:</strong> {{ apartment.get_condition_display }}</li>
+                    <li class="list-group-item"><strong>Условия продажи:</strong> {{ apartment.get_sale_conditions_display }}</li>
+                    <li class="list-group-item"><strong>Тип собственности:</strong> {{ apartment.get_ownership_type_display }}</li>
+                    <li class="list-group-item"><strong>Число уровней:</strong> {{ apartment.level_count|default:"—" }}</li>
+                    <li class="list-group-item"><strong>Владелец:</strong> {{ apartment.owner }}</li>
+                    {% if apartment.contract_number %}
+                    <li class="list-group-item"><strong>Номер договора:</strong> {{ apartment.contract_number }}</li>
+                    {% endif %}
+                    {% if apartment.contract_date %}
+                    <li class="list-group-item"><strong>Дата договора:</strong> {{ apartment.contract_date|date:"d.m.Y H:i" }}</li>
+                    {% endif %}
+                </ul>
+                <a href="{% url 'apartments:home' %}" class="btn btn-secondary">← К списку квартир</a>
+            </div>
+        </div>
+    </div>
+    <!-- Apartment Detail End -->
+
+{% endblock content %}

@@ -2,7 +2,8 @@ from django.urls import path
 
 from .views import *
 
+app_name = "accounts"
 
 urlpatterns = [
-    path("signup/", SignupPageView.as_view(), name="signup"),
+    path("profile/<uuid:pk>/", ProfilePageView.as_view(), name="profile")
 ]
