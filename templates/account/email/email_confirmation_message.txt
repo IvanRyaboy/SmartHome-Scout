@@ -1,9 +1,9 @@
- {% extends "account/email/base_message.txt" %}
- {% load account %}
- {% load i18n %}
- {% block content %}{% autoescape off %}{% user_display user as user_display %}
- {% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
- Вы получили это сообщение по тому, что {{ user_display }} указал Ваш адрес электронной почты для регистрации аккаунта на
-  {{ site_domain }}.
- Если это были Вы, перейдите по ссылке {{ activate_url }}
- {% endblocktrans %}{% endautoescape %}{% endblock %}
+{% extends "account/email/base_message.txt" %}
+{% load account %}
+{% load i18n %}
+{% block content %}{% autoescape off %}{% user_display user as user_display %}
+{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}
+You have received this message because {{ user_display }} provided your email address to register an account on
+{{ site_domain }}.
+If this was you, please click the following link {{ activate_url }}
+{% endblocktrans %}{% endautoescape %}{% endblock %}

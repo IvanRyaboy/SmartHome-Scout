@@ -8,49 +8,76 @@
             <div class="col-lg-8">
                 <h2 class="mb-4">{{ apartment.title }}</h2>
                 <h4 class="text-primary mb-3">{{ apartment.price|floatformat:0 }} ₽</h4>
-                <p><strong>Описание:</strong>{{ apartment.description }}</p>
+                {% if apartment.images.all %}
+                <div id="apartmentCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+                  <div class="carousel-indicators">
+                    {% for img in apartment.images.all %}
+                      <button type="button" data-bs-target="#apartmentCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                    {% endfor %}
+                  </div>
+
+                  <div class="carousel-inner">
+                    {% for img in apartment.images.all %}
+                      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ img.image.url }}" class="d-block w-100" alt="Apartment photo {{ forloop.counter }}">
+                      </div>
+                    {% endfor %}
+                  </div>
+
+                  <button class="carousel-control-prev" type="button" data-bs-target="#apartmentCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#apartmentCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+                {% endif %}
+
+                <p><strong>Description:</strong> {{ apartment.description }}</p>
                 <ul class="list-group mb-4">
-                    <li class="list-group-item"><strong>Дом:</strong> {{ apartment.building }}</li>
-                    <li class="list-group-item"><strong>Этаж:</strong> {{ apartment.floor }}</li>
-                    <li class="list-group-item"><strong>Количество комнат:</strong> {{ apartment.room_count }}</li>
-                    <li class="list-group-item"><strong>Общая площадь:</strong> {{ apartment.total_area }} м²</li>
-                    <li class="list-group-item"><strong>Жилая площадь:</strong> {{ apartment.living_area }} м²</li>
+                    <li class="list-group-item"><strong>Building:</strong> {{ apartment.building }}</li>
+                    <li class="list-group-item"><strong>Floor:</strong> {{ apartment.floor }}</li>
+                    <li class="list-group-item"><strong>Number of rooms:</strong> {{ apartment.room_count }}</li>
+                    <li class="list-group-item"><strong>Total area:</strong> {{ apartment.total_area }} m²</li>
+                    <li class="list-group-item"><strong>Living area:</strong> {{ apartment.living_area }} m²</li>
                     {% if apartment.kitchen_area %}
-                    <li class="list-group-item"><strong>Площадь кухни:</strong> {{ apartment.kitchen_area }} м²</li>
+                    <li class="list-group-item"><strong>Kitchen area:</strong> {{ apartment.kitchen_area }} m²</li>
                     {% endif %}
                     {% if apartment.balcony %}
                     <li class="list-group-item">
-                        <strong>Балкон:</strong> Есть
+                        <strong>Balcony:</strong> Yes
                         {% if apartment.balcony_type %}
                             ({{ apartment.get_balcony_type_display }})
                         {% endif %}
                         {% if apartment.balcony_area %}
-                            , {{ apartment.balcony_area }} м²
+                            , {{ apartment.balcony_area }} m²
                         {% endif %}
                     </li>
                     {% else %}
-                    <li class="list-group-item"><strong>Балкон:</strong> Нет</li>
+                    <li class="list-group-item"><strong>Balcony:</strong> No</li>
                     {% endif %}
-                    <li class="list-group-item"><strong>Количество санузлов:</strong> {{ apartment.bathroom_count|default:"—" }}</li>
-                    <li class="list-group-item"><strong>Высота потолков:</strong> {{ apartment.ceiling_height|default:"—" }} м</li>
-                    <li class="list-group-item"><strong>Ремонт:</strong> {{ apartment.renovation|default:"—" }}</li>
-                    <li class="list-group-item"><strong>Состояние:</strong> {{ apartment.get_condition_display }}</li>
-                    <li class="list-group-item"><strong>Условия продажи:</strong> {{ apartment.get_sale_conditions_display }}</li>
-                    <li class="list-group-item"><strong>Тип собственности:</strong> {{ apartment.get_ownership_type_display }}</li>
-                    <li class="list-group-item"><strong>Число уровней:</strong> {{ apartment.level_count|default:"—" }}</li>
-                    <li class="list-group-item"><strong>Владелец:</strong> {{ apartment.owner }}</li>
+                    <li class="list-group-item"><strong>Number of bathrooms:</strong> {{ apartment.bathroom_count|default:"—" }}</li>
+                    <li class="list-group-item"><strong>Ceiling height:</strong> {{ apartment.ceiling_height|default:"—" }} m</li>
+                    <li class="list-group-item"><strong>Renovation:</strong> {{ apartment.renovation|default:"—" }}</li>
+                    <li class="list-group-item"><strong>Condition:</strong> {{ apartment.get_condition_display }}</li>
+                    <li class="list-group-item"><strong>Sale conditions:</strong> {{ apartment.get_sale_conditions_display }}</li>
+                    <li class="list-group-item"><strong>Ownership type:</strong> {{ apartment.get_ownership_type_display }}</li>
+                    <li class="list-group-item"><strong>Number of levels:</strong> {{ apartment.level_count|default:"—" }}</li>
+                    <li class="list-group-item"><strong>Owner:</strong> {{ apartment.owner }}</li>
                     {% if apartment.contract_number %}
-                    <li class="list-group-item"><strong>Номер договора:</strong> {{ apartment.contract_number }}</li>
+                    <li class="list-group-item"><strong>Contract number:</strong> {{ apartment.contract_number }}</li>
                     {% endif %}
                     {% if apartment.contract_date %}
-                    <li class="list-group-item"><strong>Дата договора:</strong> {{ apartment.contract_date|date:"d.m.Y H:i" }}</li>
+                    <li class="list-group-item"><strong>Contract date:</strong> {{ apartment.contract_date|date:"d.m.Y H:i" }}</li>
                     {% endif %}
                 </ul>
                 {% if apartment.owner == user %}
-                    <h3><a href="{% url 'apartments:update_apartment' pk=apartment.pk %}">Изменить квартиру</a></h3>
-                    <h3><a href="{% url 'apartments:delete_apartment' pk=apartment.pk %}">Удалить квартиру</a></h3>
+                    <h3><a href="{% url 'apartments:update_apartment' pk=apartment.pk %}">Edit Apartment</a></h3>
+                    <h3><a href="{% url 'apartments:delete_apartment' pk=apartment.pk %}">Delete Apartment</a></h3>
                 {% endif %}
-                <a href="{% url 'apartments:home' %}" class="btn btn-secondary">← К списку квартир</a>
+                <a href="{% url 'apartments:home' %}" class="btn btn-secondary">← Back to apartment list</a>
             </div>
         </div>
     </div>

@@ -1,7 +1,7 @@
 {% extends '_base.html' %}
 {% load static %}
 
-{% block title %}Мой профиль{% endblock title %}
+{% block title %}My Profile{% endblock title %}
 
 {% block content %}
 <style>
@@ -62,7 +62,7 @@
     <h1 class="profile-header">{{ user.get_full_name|default:user.username }}</h1>
 
     <div class="profile-item">
-        <div class="profile-label">Имя пользователя:</div>
+        <div class="profile-label">Username:</div>
         <div class="profile-value">{{ user.username|default:"—" }}</div>
     </div>
 
@@ -73,7 +73,7 @@
 
     {% if apartments %}
     <div class="profile-item">
-        <div class="profile-label">Квартиры:</div>
+        <div class="profile-label">Apartments:</div>
         {% for apartment in apartments %}
             <div class="profile-value"><a href="{{ apartment.get_absolute_url }}">{{ apartment }}</a></div>
         {% endfor %}
@@ -81,6 +81,8 @@
     {% endif %}
 
     <div class="profile-item">
-        <div class="profile-label">Пароль:</div>
-        <div class="profile-value"><a href="{% url 'account_change_password' %}">Изменить пароль</a></div>
+        <div class="profile-label">Password:</div>
+        <div class="profile-value"><a href="{% url 'account_change_password' %}">Change password</a></div>
+    </div>
+</div>
 {% endblock content %}

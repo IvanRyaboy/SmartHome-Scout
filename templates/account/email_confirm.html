@@ -1,18 +1,18 @@
 {% extends "_base.html" %}
 {% load i18n %}
 {% load account %}
-{% block head_title %}{% trans "Подтверждение адреса электронной почты" %}{% endblock %}
+{% block head_title %}{% trans "Email Address Confirmation" %}{% endblock %}
 {% block content %}
-<h1>{% trans "Подтверждение адреса электронной почты" %}</h1>
+<h1>{% trans "Email Address Confirmation" %}</h1>
 {% if confirmation %}
     {% user_display confirmation.email_address.user as user_display %}
-    <p>{% blocktrans with confirmation.email_address.email as email %}Пожалуйста, подтвердите, что <a href="mailto:{{ email }}">{{ email }}</a> является адресом электронной почты пользователя {{ user_display }}.{% endblocktrans %}</p>
+    <p>{% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is the email address for user {{ user_display }}.{% endblocktrans %}</p>
     <form method="post" action="{% url 'account_confirm_email' confirmation.key %}">
         {% csrf_token %}
-        <button class="btn btn-primary" type="submit">{% trans 'Подтвердить' %}</button>
+        <button class="btn btn-primary" type="submit">{% trans 'Confirm' %}</button>
     </form>
 {% else %}
     {% url 'account_email' as email_url %}
-    <p>{% blocktrans %}Ссылка для подтверждения электронной почты истекла или недействительна. Пожалуйста, <a href="{{ email_url }}">запросите новую ссылку для подтверждения электронной почты</a>.{% endblocktrans %}</p>
+    <p>{% blocktrans %}The email confirmation link has expired or is invalid. Please <a href="{{ email_url }}">request a new email confirmation link</a>.{% endblocktrans %}</p>
 {% endif %}
 {% endblock %}

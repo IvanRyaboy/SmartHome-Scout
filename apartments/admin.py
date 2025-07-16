@@ -33,3 +33,8 @@ class ApartmentAdmin(admin.ModelAdmin):
     list_display = ('id', 'building')
     list_display_links = ('id', 'building')
 
+
+@admin.register(ApartmentImage)
+class ApartmentImageAdmin(admin.ModelAdmin):
+    pass
+
