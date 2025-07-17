@@ -1,8 +1,7 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 from django.urls import reverse, resolve
-from .forms import CustomUserCreationForm
-from .views import SignupPageView
+import uuid
 
 
 class CustomUserTest(TestCase):
@@ -30,8 +29,8 @@ class CustomUserTest(TestCase):
 
 
 class SignUpPageTest(TestCase):
-    username = "testuser123"
-    email = "testuser123@mail.ru"
+    username = "newuser"
+    email = "newuser@email.com"
 
     def setUp(self):
         url = reverse("account_signup")
@@ -39,9 +38,9 @@ class SignUpPageTest(TestCase):
 
     def test_signup_template(self):
         self.assertEqual(self.response.status_code, 200)
-        self.assertTemplateUsed(self.response, 'account/signup.html')
-        self.assertContains(self.response, 'Sign Up')
-        self.assertNotContains(self.response, 'I should not be there')
+        self.assertTemplateUsed(self.response, "account/signup.html")
+        self.assertContains(self.response, "Sign Up")
+        self.assertNotContains(self.response, "Hi there! I should not be on the page.")
 
     def test_signup_form(self):
         new_user = get_user_model().objects.create_user(self.username, self.email)
@@ -49,3 +48,34 @@ class SignUpPageTest(TestCase):
         self.assertEqual(get_user_model().objects.all()[0].username, self.username)
         self.assertEqual(get_user_model().objects.all()[0].email, self.email)
 
+
+class ProfilePageTest(TestCase):
+    @classmethod
+    def setUpTestData(cls):
+        cls.user_1 = get_user_model().objects.create_user(
+            username='user1',
+            email='user1@example.com',
+            password='password123'
+        )
+        cls.user_2 = get_user_model().objects.create_user(
+            username='user2',
+            email='user2@example.com',
+            password='password456'
+        )
+        cls.url_user_1 = reverse('accounts:profile', kwargs={'pk': cls.user_1.pk})
+
+    def test_access_profile_with_login_and_owner(self):
+        self.client.login(username='user1', password='password123')
+        response = self.client.get(self.url_user_1)
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, self.user_1.username)
+
+    def test_access_profile_denied_for_other_user(self):
+        self.client.login(username='user2', password='password456')
+        response = self.client.get(self.url_user_1)
+        self.assertContains(response, "Access denied", status_code=403)
+
+    def test_access_profile_redirect_for_anonymous(self):
+        response = self.client.get(self.url_user_1)
+        self.assertNotEqual(response.status_code, 200)
+        self.assertIn(response.status_code, (302, 301))

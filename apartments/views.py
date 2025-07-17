@@ -16,7 +16,7 @@ class ApartmentsHomeView(FilterView):
     filterset_class = ApartmentFilter
 
 
-class FlatDetailView(DetailView):
+class ApartmentDetailView(DetailView):
     model = Apartment
     context_object_name = 'apartment'
     template_name = 'apartments/apartment_view.html'
@@ -28,8 +28,8 @@ class AddApartmentView(LoginRequiredMixin, CreateView):
     title_page = 'Create apartment'
 
     def form_valid(self, form):
-        apartment = form.save(commit=False, owner=self.request.user)
-
+        apartment = form.save(commit=False)
+        apartment.owner = self.request.user
         apartment.save()
 
         images = self.request.FILES.getlist('image')
