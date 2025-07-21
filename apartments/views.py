@@ -1,12 +1,13 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django_filters.views import FilterView
 
-from .utils import OwnerRequiredMixin
+from .mixins import OwnerRequiredMixin
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Apartment
 from .forms import *
 from .filters import ApartmentFilter
+from .utils import create_apartment_with_images, update_apartment_images
 
 
 class ApartmentsHomeView(FilterView):
@@ -28,14 +29,7 @@ class AddApartmentView(LoginRequiredMixin, CreateView):
     title_page = 'Create apartment'
 
     def form_valid(self, form):
-        apartment = form.save(commit=False)
-        apartment.owner = self.request.user
-        apartment.save()
-
-        images = self.request.FILES.getlist('image')
-        for img in images:
-            ApartmentImage.objects.create(apartment=apartment, image=img)
-
+        create_apartment_with_images(owner=self.request.user, form=form, files=self.request.FILES)
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
@@ -58,9 +52,8 @@ class UpdateApartmentView(LoginRequiredMixin, OwnerRequiredMixin, UpdateView):
         return context
 
     def form_valid(self, form):
-        images = self.request.FILES.getlist('image')
-        for img in images:
-            ApartmentImage.objects.create(apartment=self.object, image=img)
+        self.object = form.save()
+        update_apartment_images(apartment=self.object, files=self.request.FILES)
         return super().form_valid(form)
 
 

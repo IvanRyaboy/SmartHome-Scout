@@ -1,9 +1,18 @@
-from django.http import HttpResponseForbidden
+from apartments.models import ApartmentImage
 
 
-class OwnerRequiredMixin:
-    def dispatch(self, request, *args, **kwargs):
-        obj = self.get_object()
-        if obj.owner != self.request.user:
-            return HttpResponseForbidden("Access denied")
-        return super().dispatch(request, *args, **kwargs)
+def create_apartment_with_images(owner, form, files):
+    apartment = form.save(commit=False)
+    apartment.owner = owner
+    apartment.save()
+
+    images = files.getlist('image')
+    for img in images:
+        ApartmentImage.objects.create(apartment=apartment, image=img)
+    return apartment
+
+
+def update_apartment_images(apartment, files):
+    images = files.getlist('image')
+    for img in images:
+        ApartmentImage.objects.create(apartment=apartment, image=img)

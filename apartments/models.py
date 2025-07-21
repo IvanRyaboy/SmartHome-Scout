@@ -6,14 +6,14 @@ from django.urls import reverse
 
 
 class Region(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, verbose_name='Region')
 
     def __str__(self):
         return self.name
 
 
 class Town(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, verbose_name='Town')
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='towns')
 
     def __str__(self):
