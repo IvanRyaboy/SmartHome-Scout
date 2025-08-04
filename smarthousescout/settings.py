@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'django_extensions',
     'allauth',
     'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.microsoft',
     'rest_framework',
     'django_filters',
     # local
@@ -164,6 +166,12 @@ ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_FIELDS = ['username', 'email*', 'password1*', 'password2*']
 ACCOUNT_LOGIN_METHODS = {'email'}
 ACCOUNT_UNIQUE_EMAIL = True
+SOCIALACCOUNT_PROVIDERS = {
+    "microsoft": {
+        'tenant': env("SOCIAL_AUTH_MICROSOFT_TENANT_ID"),
+        'redirect_uri': 'http://localhost:8000/accounts/microsoft/login/callback/',
+    }
+}
 
 
 # email settings

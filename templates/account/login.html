@@ -1,10 +1,39 @@
 {% extends "_base.html" %}
-    {% block title %}Log In{% endblock title %}
-    {% block content %}
-        <h2>Log In</h2>
-        <form method="post">
-            {% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit">Log In</button>
-        </form>
-    {% endblock content %}
+{% load socialaccount %}
+
+{% block title %}Log In{% endblock title %}
+
+{% block content %}
+    <h2>Log In</h2>
+
+    <!-- Стандартная форма входа -->
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Log In</button>
+    </form>
+
+    <!-- Разделитель -->
+    <div style="margin: 20px 0; text-align: center;">
+        <span style="background: #fff; padding: 0 10px;">or</span>
+        <hr style="margin-top: -10px;">
+    </div>
+
+    <!-- Кнопка входа через Microsoft -->
+    <a href="{% provider_login_url 'microsoft' %}"
+       style="display: inline-block;
+              background: #2F2F2F;
+              color: white;
+              padding: 10px 20px;
+              text-decoration: none;
+              border-radius: 4px;
+              margin-top: 10px;">
+        <i class="fab fa-microsoft" style="margin-right: 8px;"></i>
+        Sign in with Microsoft
+    </a>
+
+    <!-- Ссылка на регистрацию -->
+    <p style="margin-top: 20px;">
+        Don't have an account? <a href="{% url 'account_signup' %}">Sign up</a>
+    </p>
+{% endblock content %}

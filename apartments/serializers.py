@@ -77,7 +77,7 @@ class ApartmentCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Apartment
         fields = ['id', 'title', 'price', 'building', 'total_area', 'living_area',
-                  'kitchen_area', 'balcony_area', 'balcony', 'balcony_type',
+                  'kitchen_area', 'balcony_area', 'balcony',
                   'room_count', 'description', 'floor', 'sale_conditions',
                   'bathroom_count', 'ceiling_height', 'renovation', 'condition',
                   'contract_number', 'contract_date', 'level_count', 'ownership_type',

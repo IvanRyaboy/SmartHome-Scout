@@ -47,6 +47,7 @@ class Building(models.Model):
 
 class Apartment(models.Model):
     class Balcony(models.TextChoices):
+        NO = 'No', 'No'
         CLASSIC = 'Classic', 'Classic'
         FRENCH = 'French', 'French'
         EXTENDED = 'Extended', 'Extended'
@@ -86,8 +87,7 @@ class Apartment(models.Model):
     living_area = models.FloatField()
     kitchen_area = models.FloatField(blank=True, null=True)
     balcony_area = models.FloatField(blank=True, null=True)
-    balcony = models.BooleanField()
-    balcony_type = models.CharField(choices=Balcony.choices, blank=True, null=True, default=None)
+    balcony = models.CharField(choices=Balcony.choices, blank=True, null=True, default=Balcony.NO)
     room_count = models.IntegerField()
     description = models.TextField()
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="apartments")
@@ -101,6 +101,7 @@ class Apartment(models.Model):
     contract_date = models.DateTimeField(blank=True, null=True)
     level_count = models.IntegerField(blank=True, null=True)
     ownership_type = models.CharField(choices=Ownership.choices, blank=True, default=Ownership.PRIVATE, max_length=20)
+    link = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.title
