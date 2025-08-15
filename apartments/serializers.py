@@ -21,6 +21,14 @@ class TownSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class TownCreateSerializer(serializers.ModelSerializer):
+    region = RegionSerializer()
+
+    class Meta:
+        model = Town
+        fields = '__all__'
+
+
 class LocationSerializer(serializers.ModelSerializer):
     town = TownSerializer(read_only=True)
     town_id = serializers.PrimaryKeyRelatedField(
@@ -34,6 +42,14 @@ class LocationSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+class LocationCreateSerializer(serializers.ModelSerializer):
+    town = TownCreateSerializer()
+
+    class Meta:
+        model = Location
+        fields = '__all__'
+
+
 class BuildingSerializer(serializers.ModelSerializer):
     location = LocationSerializer(read_only=True)
     location_id = serializers.PrimaryKeyRelatedField(
@@ -45,6 +61,14 @@ class BuildingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Building
         fields = "__all__"
+
+
+class BuildingCreateSerializer(serializers.ModelSerializer):
+    location = LocationCreateSerializer()
+
+    class Meta:
+        model = Building
+        fields = '__all__'
 
 
 class ApartmentImageSerializer(serializers.ModelSerializer):
@@ -68,6 +92,7 @@ class ApartmentSerializer(serializers.ModelSerializer):
 
 
 class ApartmentCreateSerializer(serializers.ModelSerializer):
+    building = BuildingCreateSerializer()
     images = serializers.ListField(
         child=serializers.ImageField(allow_empty_file=False, use_url=False),
         write_only=True,
@@ -76,21 +101,34 @@ class ApartmentCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Apartment
-        fields = ['id', 'title', 'price', 'building', 'total_area', 'living_area',
-                  'kitchen_area', 'balcony_area', 'balcony',
-                  'room_count', 'description', 'floor', 'sale_conditions',
-                  'bathroom_count', 'ceiling_height', 'renovation', 'condition',
-                  'contract_number', 'contract_date', 'level_count', 'ownership_type',
-                  'images']
+        exclude = ['owner', 'id']
 
     def create(self, validated_data):
-        apartment = Apartment.objects.create(**validated_data)
+        user_model = get_user_model()
+        user = user_model.objects.get(id='736166cf-991f-4057-a8f6-ebdd1eee55e2')
 
-        request = self.context.get('request')
-        if request and hasattr(request, 'FILES'):
-            images = request.FILES.getlist('images')
+        building_data = validated_data.pop('building')
+        location_data = building_data.pop('location')
+        town_data = location_data.pop('town')
+        region_data = town_data.pop('region')
+        images = validated_data.pop('images', [])
 
-            for image in images:
-                ApartmentImage.objects.create(apartment=apartment, image=image)
+        region = Region.objects.get_or_create(**region_data)
+
+        town = Town.objects.get_or_create(region=region, **town_data)
+
+        location = Location.objects.get_or_create(town=town, **location_data)
+
+        building = Building.objects.get_or_create(location=location, **building_data)
+
+        apartment = Apartment.objects.create(
+            building=building,
+            owner=user,
+            **validated_data
+        )
+
+        for image in images:
+            ApartmentImage.objects.create(apartment=apartment, image=image)
+
         return apartment
 

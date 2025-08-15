@@ -31,50 +31,21 @@ class ApartmentViewSet(viewsets.ModelViewSet):
             return [AllowAny(),]
 
 
-class TownViewSet(viewsets.ModelViewSet):
+class TownViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TownSerializer
     queryset = Town.objects.all()
 
-    def get_permissions(self):
-        if self.action == "create":
-            return [IsAuthenticated(), ]
-        if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsAdminUser(), ]
-        else:
-            return [AllowAny(), ]
 
-
-class LocationViewSet(viewsets.ModelViewSet):
+class LocationViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = LocationSerializer
     queryset = Location.objects.all()
 
-    def get_permissions(self):
-        if self.action == "create":
-            return [IsAuthenticated(), ]
-        if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsAdminUser(), ]
-        else:
-            return [AllowAny(), ]
 
-
-class BuildingViewSet(viewsets.ModelViewSet):
+class BuildingViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = BuildingSerializer
     queryset = Building.objects.all()
 
-    def get_permissions(self):
-        if self.action == "create":
-            return [IsAuthenticated(),]
-        if self.action in ['update', 'partial_update', 'destroy']:
-            return [IsAdminUser(),]
-        else:
-            return [AllowAny(),]
 
-
-class RegionAPIList(generics.ListAPIView):
+class RegionViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = RegionSerializer
     queryset = Region.objects.all()
-    serializer_class = RegionSerializer
-
-
-class RegionAPIRetrieve(generics.RetrieveAPIView):
-    queryset = Region
-    serializer_class = RegionSerializer

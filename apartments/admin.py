@@ -38,3 +38,7 @@ class ApartmentAdmin(admin.ModelAdmin):
 class ApartmentImageAdmin(admin.ModelAdmin):
     pass
 
+
+@admin.register(IDS)
+class IDSAdmin(admin.ModelAdmin):
+    pass

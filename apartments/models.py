@@ -24,8 +24,8 @@ class Location(models.Model):
     town = models.ForeignKey(Town, on_delete=models.CASCADE, related_name='locations')
     district = models.CharField(max_length=255, blank=True)
     microdistrict = models.CharField(max_length=255, blank=True)
-    street = models.CharField(max_length=100)
-    house_number = models.CharField(max_length=255)
+    street = models.CharField(max_length=100, null=True, blank=True)
+    house_number = models.CharField(max_length=255, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
 
@@ -113,3 +113,8 @@ class Apartment(models.Model):
 class ApartmentImage(models.Model):
     apartment = models.ForeignKey(Apartment, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to="apartments_images/")
+
+
+class IDS(models.Model):
+    apartment_id = models.IntegerField(verbose_name='Монго id')
+    status = models.CharField(verbose_name='Статус')

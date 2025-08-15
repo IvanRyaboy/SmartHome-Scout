@@ -24,3 +24,4 @@ def get_data_from_flask_api():
 
     if response:
         print(response.json())
+

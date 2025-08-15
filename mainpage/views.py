@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from apartments.utils import get_data_from_flask_api
+from apartments.models import IDS
 import json
 
 
@@ -23,8 +24,10 @@ def receive_webhook(request):
     if request.method == 'POST':
         try:
             data = json.loads(request.body)
+            apartments = data.get('ids', [])
+            for apartment in apartments:
+                IDS.objects.create(apartment_id=apartment, status='IDS')
             print(f"Receive data from Flask: {data}")
-            get_data_from_flask_api()
             return JsonResponse({"message": "Webhook received successfully!"}, status=200)
         except json.JSONDecodeError:
             return JsonResponse({"error": "Invalid JSON"}, status=400)
