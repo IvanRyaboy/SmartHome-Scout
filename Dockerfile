@@ -1,12 +1,9 @@
+
 FROM python:3.12-slim
-
-ENV PIP_DISABLE_PIP_VERSION_CHECK 1
-ENV PYTHONDONTWRITEBYTECODE 1
-ENV PYTHONUNBUFFERED 1
-
+ENV PIP_DISABLE_PIP_VERSION_CHECK=1 PYTHONDONTWRITEBYTECODE=1 PYTHONUNBUFFERED=1
 WORKDIR /code
-
-COPY ./requirements.txt .
-RUN pip install -r requirements.txt
-
+COPY requirements.txt .
+RUN pip install --upgrade pip setuptools wheel \
+ && pip install --no-cache-dir -r requirements.txt
 COPY . .
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

@@ -89,7 +89,7 @@ class Apartment(models.Model):
     balcony_area = models.FloatField(blank=True, null=True)
     balcony = models.CharField(choices=Balcony.choices, blank=True, null=True, default=Balcony.NO)
     room_count = models.IntegerField()
-    description = models.TextField()
+    description = models.TextField(blank=True, null=True)
     owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="apartments")
     floor = models.IntegerField()
     sale_conditions = models.CharField(choices=Sale.choices, default=Sale.OPEN, max_length=20)
