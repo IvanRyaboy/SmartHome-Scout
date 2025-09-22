@@ -62,6 +62,7 @@ INSTALLED_APPS = [
     'mainpage.apps.MainpageConfig',
     'apartments.apps.ApartmentsConfig',
     'accounts.apps.AccountsConfig',
+    'rent.apps.RentConfig',
 ]
 
 MIDDLEWARE = [
