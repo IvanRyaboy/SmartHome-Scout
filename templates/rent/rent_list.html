@@ -1,0 +1,282 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}Rent{% endblock %}
+
+{% block extra_css %}
+<style>
+    .filter-section {
+        background: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 30px;
+    }
+    .filter-group {
+        margin-bottom: 15px;
+    }
+    .filter-label {
+        font-weight: 500;
+        margin-bottom: 5px;
+        display: block;
+    }
+    .range-filters {
+        display: flex;
+        gap: 15px;
+    }
+    .range-filter {
+        flex: 1;
+    }
+    .filter-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1>Rent List</h1>
+        <a href="{% url 'apartments:add_apartment' %}" class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i>Add Rent
+        </a>
+    </div>
+    <button class="btn btn-outline-primary mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#filterCollapse">
+        <i class="fas fa-filter me-2"></i>Show/Hide Filters
+    </button>
+
+    <div class="collapse" id="filterCollapse">
+        <!-- Filters form here -->
+        <form method="get" class="filter-section">
+            <div class="row">
+                <!-- Price -->
+                <div class="col-md-6">
+                    <div class="filter-group">
+                        <label class="filter-label">Price</label>
+                        <div class="range-filters">
+                            <div class="range-filter">
+                                <input type="number" name="price__gte" class="form-control" placeholder="From"
+                                       value="{{ filter.form.price__gte.value|default_if_none:'' }}">
+                            </div>
+                            <div class="range-filter">
+                                <input type="number" name="price__lte" class="form-control" placeholder="To"
+                                       value="{{ filter.form.price__lte.value|default_if_none:'' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Room Count -->
+                <div class="col-md-6">
+                    <div class="filter-group">
+                        <label class="filter-label">Number of Rooms</label>
+                        <div class="range-filters">
+                            <div class="range-filter">
+                                <input type="number" name="room_count__gte" class="form-control" placeholder="From"
+                                       value="{{ filter.form.room_count__gte.value|default_if_none:'' }}">
+                            </div>
+                            <div class="range-filter">
+                                <input type="number" name="room_count__lte" class="form-control" placeholder="To"
+                                       value="{{ filter.form.room_count__lte.value|default_if_none:'' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Areas -->
+                <div class="col-md-4">
+                    <div class="filter-group">
+                        <label class="filter-label">Total Area</label>
+                        <div class="range-filters">
+                            <div class="range-filter">
+                                <input type="number" step="0.1" name="total_area__gte" class="form-control" placeholder="From"
+                                       value="{{ filter.form.total_area__gte.value|default_if_none:'' }}">
+                            </div>
+                            <div class="range-filter">
+                                <input type="number" step="0.1" name="total_area__lte" class="form-control" placeholder="To"
+                                       value="{{ filter.form.total_area__lte.value|default_if_none:'' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="filter-group">
+                        <label class="filter-label">Living Area</label>
+                        <div class="range-filters">
+                            <div class="range-filter">
+                                <input type="number" step="0.1" name="living_area__gte" class="form-control" placeholder="From"
+                                       value="{{ filter.form.living_area__gte.value|default_if_none:'' }}">
+                            </div>
+                            <div class="range-filter">
+                                <input type="number" step="0.1" name="living_area__lte" class="form-control" placeholder="To"
+                                       value="{{ filter.form.living_area__lte.value|default_if_none:'' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="filter-group">
+                        <label class="filter-label">Kitchen Area</label>
+                        <div class="range-filters">
+                            <div class="range-filter">
+                                <input type="number" step="0.1" name="kitchen_area__gte" class="form-control" placeholder="From"
+                                       value="{{ filter.form.kitchen_area__gte.value|default_if_none:'' }}">
+                            </div>
+                            <div class="range-filter">
+                                <input type="number" step="0.1" name="kitchen_area__lte" class="form-control" placeholder="To"
+                                       value="{{ filter.form.kitchen_area__lte.value|default_if_none:'' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Other Filters -->
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Floor</label>
+                        <div class="range-filters">
+                            <div class="range-filter">
+                                <input type="number" name="floor__gte" class="form-control" placeholder="From"
+                                       value="{{ filter.form.floor__gte.value|default_if_none:'' }}">
+                            </div>
+                            <div class="range-filter">
+                                <input type="number" name="floor__lte" class="form-control" placeholder="To"
+                                       value="{{ filter.form.floor__lte.value|default_if_none:'' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="filter-label">Ceiling Height</label>
+                        <div class="range-filters">
+                            <div class="range-filter">
+                                <input type="number" step="0.1" name="ceiling_height__gte" class="form-control" placeholder="From"
+                                       value="{{ filter.form.ceiling_height__gte.value|default_if_none:'' }}">
+                            </div>
+                            <div class="range-filter">
+                                <input type="number" step="0.1" name="ceiling_height__lte" class="form-control" placeholder="To"
+                                       value="{{ filter.form.ceiling_height__lte.value|default_if_none:'' }}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="filter-group">
+                        <label class="form-label">{{ filter.form.balcony.label }}</label>
+                        {{ filter.form.balcony }}
+                    </div>
+                </div>
+            </div>
+            <div class="filter-actions">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-filter me-2"></i>Apply Filters
+                </button>
+                <a href="?" class="btn btn-outline-secondary">
+                    <i class="fas fa-times me-2"></i>Reset
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% if filter.qs %}
+            {% for rent in filter.qs %}
+            <div class="col">
+                <div class="card h-100 shadow-sm overflow-hidden">
+                    {% with first_image=rent.images.first %}
+                    <img src="{{ first_image.image.url }}" class="card-img-top" alt="{{ rent.title }}" style="height: 200px; object-fit: cover;">
+                    {% endwith %}
+                    <div class="card-body d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <h5 class="card-title mb-0">
+                                <a href="{{ rent.get_absolute_url }}" class="text-decoration-none text-dark">
+                                    {{ rent.title|default:"Apartment"|truncatechars:30 }}
+                                </a>
+                            </h5>
+                            <span class="badge price-badge text-white">{{ rent.price|floatformat:0 }} ₽</span>
+                        </div>
+                        <div class="mb-3">
+                            <small class="text-muted">
+                                <i class="fas fa-building me-1"></i> {{ rent.building|truncatechars:25 }}
+                            </small>
+                        </div>
+
+                        <ul class="list-unstyled small mb-3">
+                            <li class="mb-1"><i class="fas fa-layer-group me-2 text-primary"></i>Floor: {{ rent.floor }}</li>
+                            <li class="mb-1"><i class="fas fa-door-open me-2 text-primary"></i>Rooms: {{ rent.room_count }}</li>
+                            <li class="mb-1"><i class="fas fa-ruler-combined me-2 text-primary"></i>Area: {{ rent.total_area }} m²</li>
+                            <li class="mb-1"><i class="fas fa-paint-roller me-2 text-primary"></i>{{ rent.get_condition_display }}</li>
+                        </ul>
+
+                        <div class="mt-auto d-flex justify-content-between align-items-center">
+                            <small class="text-muted">
+                                <i class="far fa-clock me-1"></i> {{ rent.created_at|date:"d.m.Y" }}
+                            </small>
+                            <a href="{{ rent.get_absolute_url }}" class="btn btn-sm btn-outline-primary">
+                                Details <i class="fas fa-arrow-right ms-1"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12">
+                <div class="text-center py-5">
+                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">No rent found</h4>
+                    <p class="text-muted">Try changing your filter parameters</p>
+                    <a href="?" class="btn btn-outline-primary">Reset filters</a>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    {% if is_paginated %}
+    <nav class="mt-5">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if filter.form.data %}{{ filter.form.data.urlencode }}&{% endif %}page=1">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?{% if filter.form.data %}{{ filter.form.data.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+            {% endif %}
+
+            {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                    <li class="page-item active"><span class="page-link">{{ num }}</span></li>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li class="page-item">
+                        <a class="page-link" href="?{% if filter.form.data %}{{ filter.form.data.urlencode }}&{% endif %}page={{ num }}">{{ num }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?{% if filter.form.data %}{{ filter.form.data.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="?{% if filter.form.data %}{{ filter.form.data.urlencode }}&{% endif %}page={{ page_obj.paginator.num_pages }}">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock %}

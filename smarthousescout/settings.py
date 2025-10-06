@@ -101,8 +101,16 @@ WSGI_APPLICATION = 'smarthousescout.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': env.dj_db_url("DATABASE_URL",
-                             default="postgres://postgres@db/postgres")
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("smarthomescoutdb"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": "db",  # или localhost
+        "PORT": 5432,
+        "OPTIONS": {"client_encoding": "UTF8"},
+        "TEST": {"NAME": "test_postgres"},
+    }
 }
 # DATABASES = {
 #     'default': {

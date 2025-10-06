@@ -1,0 +1,55 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block content %}
+    <!-- Rent Detail Start -->
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-8">
+                <h2 class="mb-4">{{ rent.title }}</h2>
+                <h4 class="text-primary mb-3">{{ rent.price|floatformat:0 }} ₽</h4>
+                {% if rent.images.all %}
+                <div id="apartmentCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+                  <div class="carousel-indicators">
+                    {% for img in apartment.images.all %}
+                      <button type="button" data-bs-target="#apartmentCarousel" data-bs-slide-to="{{ forloop.counter0 }}" {% if forloop.first %}class="active" aria-current="true"{% endif %} aria-label="Slide {{ forloop.counter }}"></button>
+                    {% endfor %}
+                  </div>
+
+                  <div class="carousel-inner">
+                    {% for img in rent.images.all %}
+                      <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ img.image.url }}" class="d-block w-100" alt="Rent photo {{ forloop.counter }}">
+                      </div>
+                    {% endfor %}
+                  </div>
+
+                  <button class="carousel-control-prev" type="button" data-bs-target="#apartmentCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button class="carousel-control-next" type="button" data-bs-target="#apartmentCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
+                </div>
+                {% endif %}
+
+                <p><strong>Description:</strong> {{ rent.description }}</p>
+                <ul class="list-group mb-4">
+                    <li class="list-group-item"><strong>Building:</strong> {{ rent.building }}</li>
+                    <li class="list-group-item"><strong>Floor:</strong> {{ rent.floor }}</li>
+                    <li class="list-group-item"><strong>Number of rooms:</strong> {{ rent.room_count }}</li>
+                    <li class="list-group-item"><strong>Total area:</strong> {{ rent.total_area }} m²</li>
+                    <li class="list-group-item"><strong>Living area:</strong> {{ rent.living_area }} m²</li>
+                    {% if rent.kitchen_area %}
+                    <li class="list-group-item"><strong>Kitchen area:</strong> {{ rent.kitchen_area }} m²</li>
+                    {% endif %}
+                </ul>
+                <a href="{% url 'rent:home' %}" class="btn btn-secondary">← Back to apartment list</a>
+            </div>
+        </div>
+    </div>
+    <!-- Apartment Detail End -->
+
+{% endblock content %}
