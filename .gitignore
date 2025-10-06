@@ -5,3 +5,7 @@
 *.py[cod]
 /.idea/
 .env
+# Celery Beat schedule file
+celerybeat-schedule
+celerybeat-schedule.db
+celerybeat.pid

@@ -1,7 +1,6 @@
 from environs import Env
 import requests
 from .models import IDS
-from rest_framework.test import APIRequestFactory
 from .serializers import ApartmentCreateSerializer
 
 

@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from apartments.flask import start_fetching_data  # или правильный путь
+from apartments.flask import start_fetching_data
 
 
 class Command(BaseCommand):

@@ -1,13 +1,8 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.exceptions import PermissionDenied
-from rest_framework import generics, viewsets
-from django.shortcuts import get_object_or_404
-from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated, AllowAny, IsAdminUser
-from rest_framework import permissions
-from rest_framework.response import Response
+from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 from .filters import ApartmentFilter
-from .models import *
 from .permissions import IsOwnerOrAdmin
 from .serializers import *
 
