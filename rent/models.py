@@ -44,10 +44,14 @@ class Rent(models.Model):
 
 
 class RentImage(models.Model):
-    apartment = models.ForeignKey(Rent, related_name='images', on_delete=models.CASCADE)
+    rent = models.ForeignKey(Rent, related_name='images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to="rent_images/")
 
 
 class IDS(models.Model):
-    rent_id = models.IntegerField(verbose_name='Монго id')
-    status = models.CharField(verbose_name='Статус')
+    rent_id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
+    status = models.CharField()

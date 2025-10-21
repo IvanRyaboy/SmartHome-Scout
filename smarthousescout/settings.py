@@ -167,6 +167,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # user settings
 AUTH_USER_MODEL = "accounts.CustomUser"
+SERVICE_USER_ID = os.getenv('SERVICE_USER_ID')
 
 
 # django-allauth config
@@ -233,7 +234,7 @@ REST_AUTH = {
 
 
 # Celery config
-CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://redis:6379/0")
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL", "redis://redis:6379/1")
 CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND", "redis://redis:6379/1")
 CELERY_TIMEZONE = "Europe/Moscow"  # или ваш
 CELERY_ENABLE_UTC = True

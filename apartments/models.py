@@ -16,6 +16,11 @@ class Town(models.Model):
     name = models.CharField(max_length=255, verbose_name='Town')
     region = models.ForeignKey(Region, on_delete=models.CASCADE, related_name='towns')
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['region', 'name'], name='uq_town_region_name')
+        ]
+
     def __str__(self):
         return self.name
 
@@ -28,6 +33,17 @@ class Location(models.Model):
     house_number = models.CharField(max_length=255, null=True, blank=True)
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
+
+    class Meta:
+        indexes = [
+            models.Index(fields=['town', 'street', 'house_number'])
+        ]
+        constraints = [
+            models.UniqueConstraint(
+                fields=['town', 'district', 'microdistrict', 'street', 'house_number'],
+                name='uq_location_full_address',
+            )
+        ]
 
     def __str__(self):
         return f"{self.town.name}, St. {self.street}, house {self.house_number}"
@@ -116,5 +132,9 @@ class ApartmentImage(models.Model):
 
 
 class IDS(models.Model):
-    apartment_id = models.IntegerField(verbose_name='Монго id')
+    apartment_id = models.UUIDField(
+        primary_key=True,
+        default=uuid.uuid4,
+        editable=False
+    )
     status = models.CharField(verbose_name='Статус')

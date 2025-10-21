@@ -7,7 +7,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-@celery.task(name='tasks.start_fetching_apartments_flask_data', bind=True, autoretry_for=(Exception,), retry_backoff=True, retry_jitter=True)
+@celery.task(name='tasks.start_fetching_rent_flask_data', bind=True, autoretry_for=(Exception,), retry_backoff=True, retry_jitter=True)
 def start_fetching_flask_data(self):
     try:
         logger.info("Начало получения данных с Flask API")

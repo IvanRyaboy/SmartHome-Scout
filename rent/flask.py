@@ -1,7 +1,7 @@
 from environs import Env
 import requests
-from .models import IDS, Apartment
-from .serializers import ApartmentCreateSerializer
+from .models import IDS, Rent
+from .serializers import RentCreateSerializer
 from django.db import transaction, IntegrityError
 from psycopg2 import errorcodes
 from accounts.utils import get_service_user
@@ -23,15 +23,15 @@ def get_azure_token():
     return response.json().get("access_token")
 
 
-def fetch_flask_data(apartment_id):
-    """Возвращает данные о квартирах, id которых отправляются вебхуком из микросервиса на flask"""
+def fetch_flask_data(rent_id):
+    """Возвращает данные о арендных квартирах, id которых отправляются вебхуком из микросервиса на flask"""
     token = get_azure_token()
     headers = {
         "Authorization": f"Bearer {token}"
     }
 
     response = requests.get(
-        f'http://flask:5000/apartments/{apartment_id}',
+        f'http://flask:5000/rent/{rent_id}',
         headers=headers
     )
 
@@ -46,27 +46,27 @@ def _is_unique_violation(e: IntegrityError) -> bool:
     return getattr(cause, 'pgcode', None) == errorcodes.UNIQUE_VIOLATION
 
 
-def create_apartment_from_data(apartment_data):
+def create_rent_from_data(rent_data):
     service_user = get_service_user()
-    serializer = ApartmentCreateSerializer(data=apartment_data, context={'owner': service_user})
+    serializer = RentCreateSerializer(data=rent_data, context={'owner': service_user})
     serializer.is_valid(raise_exception=True)
 
     try:
         with transaction.atomic():
-            apt = serializer.save()
-        return apt, True, 'created'
+            rnt = serializer.save()
+        return rnt, True, 'created'
 
     except IntegrityError as e:
         if _is_unique_violation(e):
-            ext_id = apartment_data.get('_id')
+            ext_id = rent_data.get('_id')
             if ext_id:
-                existing = Apartment.objects.filter(id=ext_id).first()
+                existing = Rent.objects.filter(id=ext_id).first()
                 if existing:
                     return existing, False, 'exists'
 
-            link = apartment_data.get('link')
+            link = rent_data.get('link')
             if link:
-                existing = Apartment.objects.filter(link=link).first()
+                existing = Rent.objects.filter(link=link).first()
                 if existing:
                     return existing, False, 'exists'
             return None, False, 'duplicate_without_lookup'
@@ -75,15 +75,15 @@ def create_apartment_from_data(apartment_data):
 
 
 def start_fetching_data():
-    apartments = IDS.objects.filter(status='IDS')
-    for apartment in apartments:
-        apartment_id = apartment.apartment_id
-        flask_data = fetch_flask_data(apartment_id)
-        create_apartment_from_data(flask_data)
-        apartment.status = 'PROCESSED'
-        apartment.save(update_fields=['status'])
+    rent_apartments = IDS.objects.filter(status='IDS')
+    for rent in rent_apartments:
+        rent_id = rent.rent_id
+        flask_data = fetch_flask_data(rent_id)
+        create_rent_from_data(flask_data)
+        rent.status = 'PROCESSED'
+        rent.save(update_fields=['status'])
     return None
 
 
-if __name__ == "__name__":
-    print(fetch_flask_data('3892327'))
+# if __name__ == "__name__":
+#     print(fetch_flask_data('3892327'))
