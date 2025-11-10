@@ -3,6 +3,7 @@ from .flask import start_fetching_data
 from django.db import IntegrityError
 from psycopg2 import errorcodes
 import logging
+from .fastapi import send_ids
 
 logger = logging.getLogger(__name__)
 
@@ -12,6 +13,7 @@ def start_fetching_flask_data(self):
     try:
         logger.info("Начало получения данных с Flask API")
         result = start_fetching_data()
+        send_ids(result)
         logger.info("Получение данных успешно завершено")
         return {'status': 'success', 'result': result}
 

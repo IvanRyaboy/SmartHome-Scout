@@ -76,13 +76,15 @@ def create_rent_from_data(rent_data):
 
 def start_fetching_data():
     rent_apartments = IDS.objects.filter(status='IDS')
+    ids = []
     for rent in rent_apartments:
         rent_id = rent.rent_id
+        ids.append(rent_id)
         flask_data = fetch_flask_data(rent_id)
         create_rent_from_data(flask_data)
         rent.status = 'PROCESSED'
         rent.save(update_fields=['status'])
-    return None
+    return ids
 
 
 # if __name__ == "__name__":

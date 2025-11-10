@@ -126,6 +126,7 @@ class ApartmentCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Apartment
+        fields = '__all__'
 
     @transaction.atomic
     def create(self, validated_data):

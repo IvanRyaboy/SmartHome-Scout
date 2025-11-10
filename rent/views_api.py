@@ -8,7 +8,7 @@ from .models import *
 from .serializers import *
 
 
-class ApartmentViewSet(viewsets.ModelViewSet):
+class RentViewSet(viewsets.ModelViewSet):
     queryset = Rent.objects.all()
 
     def get_serializer_class(self):

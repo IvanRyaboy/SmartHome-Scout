@@ -1,3 +1,4 @@
+from django.db import transaction
 from rest_framework import serializers
 from apartments.serializers import BuildingSerializer, BuildingCreateSerializer
 from apartments.models import Region, Town, Location
@@ -58,7 +59,9 @@ class RentCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Rent
+        fields = '__all__'
 
+    @transaction.atomic
     def create(self, validated_data):
         building_data = validated_data.pop('building')
         location_data = building_data.pop('location')
