@@ -4,6 +4,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 
+from pgvector.django import VectorField
+
 
 class Region(models.Model):
     name = models.CharField(max_length=255, verbose_name='Region')
@@ -118,6 +120,7 @@ class Apartment(models.Model):
     level_count = models.IntegerField(blank=True, null=True)
     ownership_type = models.CharField(choices=Ownership.choices, blank=True, default=Ownership.PRIVATE, max_length=20)
     link = models.CharField(max_length=100, blank=True, null=True)
+    updated_at = models.DateTimeField(auto_now=True, null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -138,3 +141,44 @@ class IDS(models.Model):
         editable=False
     )
     status = models.CharField(verbose_name='Статус')
+
+
+class ListingEmbedding(models.Model):
+    """Vector embeddings for apartments and rents (semantic search)."""
+    LISTING_TYPE_APARTMENT = 'apartment'
+    LISTING_TYPE_RENT = 'rent'
+    LISTING_TYPES = [(LISTING_TYPE_APARTMENT, 'Apartment'), (LISTING_TYPE_RENT, 'Rent')]
+
+    apartment = models.ForeignKey(
+        Apartment,
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='embeddings'
+    )
+    rent = models.ForeignKey(
+        'rent.Rent',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        related_name='embeddings'
+    )
+    embedding = VectorField(dimensions=1536)
+    model_name = models.CharField(max_length=64, blank=True)
+
+    class Meta:
+        db_table = 'apartments_listingembedding'
+        constraints = [
+            models.CheckConstraint(
+                check=(
+                    models.Q(apartment__isnull=False, rent__isnull=True)
+                    | models.Q(apartment__isnull=True, rent__isnull=False)
+                ),
+                name='listing_embedding_one_of_apartment_rent',
+            )
+        ]
+
+    def __str__(self):
+        if self.apartment_id:
+            return f"Embedding for Apartment {self.apartment_id}"
+        return f"Embedding for Rent {self.rent_id}"

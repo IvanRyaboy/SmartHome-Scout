@@ -42,3 +42,8 @@ class ApartmentImageAdmin(admin.ModelAdmin):
 @admin.register(IDS)
 class IDSAdmin(admin.ModelAdmin):
     pass
+
+
+@admin.register(ListingEmbedding)
+class ListingEmbeddingAdmin(admin.ModelAdmin):
+    list_display = ['id', 'apartment', 'rent', 'model_name']
