@@ -1,0 +1,60 @@
+{% extends "_base.html" %}
+{% block title %}Rezul'tat zaprosa – SmartHome Scout{% endblock %}
+{% block extra_head %}
+<style>
+@media print {
+  .no-print { display: none !important; }
+  body { font-size: 10pt; }
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="no-print mb-3">
+    <a href="{% url 'reports:query_builder' %}" class="btn btn-outline-primary">Nazad k konstruktoru</a>
+    <button type="button" class="btn btn-outline-secondary" onclick="window.print()">Pechat'</button>
+    {% if post_params %}
+    <form method="post" action="{% url 'reports:query_export_excel' %}" style="display:inline" target="_blank">
+      {% csrf_token %}
+      {% for k, v in post_params.items %}
+        {% if v %}<input type="hidden" name="{{ k }}" value="{{ v }}">{% endif %}
+      {% endfor %}
+      <button type="submit" class="btn btn-outline-success">Eksport v Excel</button>
+    </form>
+    {% endif %}
+  </div>
+  {% if error %}
+    <p class="text-danger">{{ error }}</p>
+  {% else %}
+    <h2>{{ query_label|default:"Rezul'tat" }}</h2>
+    {% if columns %}
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
+            {% for col in columns %}
+              <th>{{ col }}</th>
+            {% endfor %}
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+            <tr>
+              {% for cell in row %}
+                <td>{{ cell }}</td>
+              {% endfor %}
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    <p class="text-muted">Vsego zapisej: {{ rows|length }}</p>
+    {% else %}
+    <p>Net dannyh.</p>
+    {% endif %}
+  {% endif %}
+</div>
+<script>
+// Fix table cells: row[col]
+</script>
+{% endblock %}

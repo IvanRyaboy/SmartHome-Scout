@@ -1,0 +1,47 @@
+{% extends "_base.html" %}
+{% block title %}Query builder (admin) – SmartHome Scout{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <h1>Constructor zaprosov (admin)</h1>
+  <p class="text-muted">Vyberte predustanovlennyj zapros i pri neobhodimosti ukazhite parametry.</p>
+  <form method="post" action="{% url 'reports:query_builder_run' %}" class="mb-4">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="query_key" class="form-label">Zapros</label>
+      <select name="query_key" id="query_key" class="form-select" required>
+        <option value="">-- Vybrat' --</option>
+        {% for key, label, _params, _ in queries %}
+          <option value="{{ key }}">{{ label }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div id="params" class="mb-3"></div>
+    <button type="submit" class="btn btn-primary">Vypolnit'</button>
+    <a href="{% url 'admin:index' %}" class="btn btn-outline-secondary">V admin</a>
+  </form>
+  <p class="small">Parametry (esli est'): town_id, region_id, limit, price_min, price_max.</p>
+</div>
+<script>
+document.getElementById('query_key').addEventListener('change', function() {
+  const key = this.value;
+  const paramsDiv = document.getElementById('params');
+  paramsDiv.innerHTML = '';
+  const queries = {{ queries_json|safe }};
+  const q = queries.find(x => x[0] === key);
+  if (!q || !q[2].length) return;
+  q[2].forEach(p => {
+    const label = document.createElement('label');
+    label.className = 'form-label';
+    label.textContent = p;
+    const input = document.createElement('input');
+    input.type = p.includes('price') ? 'number' : 'number';
+    input.name = p;
+    input.className = 'form-control mb-2';
+    input.placeholder = p;
+    if (p === 'limit') input.placeholder = '100';
+    paramsDiv.appendChild(label);
+    paramsDiv.appendChild(input);
+  });
+});
+</script>
+{% endblock %}
